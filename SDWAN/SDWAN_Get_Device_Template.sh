@@ -1,0 +1,1 @@
+curl -X GET -k https://sandboxsdwan.cisco.com:8443/dataservice/template/device  -H 'Cookie: JSESSIONID=R6t5vmYd--yyaTbW7OrOS9fo4cukm-6EEMWcccYv.4854266f-a8ad-4068-9651-d4e834384f51'

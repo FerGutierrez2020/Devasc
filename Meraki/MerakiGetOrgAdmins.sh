@@ -1,0 +1,1 @@
+curl -X GET --url 'https://api.meraki.com/api/v0/organizations/549236/admins'  -H 'X-Cisco-Meraki-API-Key: 15da0c6ffff295f16267f88f98694cf29a86ed87' -H 'Accept: application/json'
