@@ -1,0 +1,12 @@
+--- 
+
+- name: Test Ansible ios_command on Cisco IOS XE 
+  hosts: iosxe 
+  
+  tasks:
+    - name: Change hostname
+      ios_config:
+        lines:
+        - hostname csr1000v-1
+
+#ansible-playbook  -i hosts changeHostname.yml -u developer -k

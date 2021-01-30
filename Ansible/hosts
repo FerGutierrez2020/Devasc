@@ -1,0 +1,9 @@
+[iosxe] 
+#172.16.98.132 
+#172.16.98.128
+sandbox-iosxe-latest-1.cisco.com
+
+
+[iosxe:vars] 
+ansible_network_os=ios 
+ansible_connection=network_cli

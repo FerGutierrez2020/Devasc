@@ -1,0 +1,46 @@
+--- 
+
+- name: Test Ansible ios_command on Cisco IOS XE 
+  hosts: iosxe 
+    
+  tasks: 
+   - name: show ip interface brief 
+     ios_command: 
+      commands: 
+        - show ip interface brief  
+     register: config
+ 
+   - name: SAVE OUTPUT TO ./backups/
+     copy:
+       content: "{{ config.stdout[0] }}"
+       dest: "backups/show_ip_{{ inventory_hostname }}.txt"
+
+   - name: show version
+     ios_command: 
+      commands: 
+        - show version   
+     register: config2
+
+   - name: SAVE OUTPUT TO ./backups/
+     copy:
+       content: "{{ config2.stdout[0] }}"
+       dest: "backups/show_ver_{{ inventory_hostname }}.txt"
+   
+   - name: show running
+     ios_command: 
+      commands: 
+        - show running-config     
+     register: config3
+
+   - name: SAVE OUTPUT TO ./backups/
+     copy:
+       content: "{{ config3.stdout[0] }}"
+       dest: "backups/show_run_{{ inventory_hostname }}.txt"
+  
+
+
+#Para imprimir el directorio completo usamos el comando sudo apt-get install tree
+#Usar el siguiente comando para ejecutar el playbook:
+#"ansible-playbook -i hosts checklocalinfo.yml -u cisco -k"
+#"ansible-playbook -v -i hosts checklocalinfo.yml -u cisco -k" <--Desplegar el output de los shows
+#"ansible-playbook -v -i hosts checklocalinfo.yml -u developer -k"
