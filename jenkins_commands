@@ -1,0 +1,34 @@
+Jenkins commands:
+
+docker run --rm -u root -p 8080:8080 -v jenkins-data:/var/jenkins_home -v $(which docker):/usr/bin/docker -v /var/run/docker.sock:/var/run/docker.sock -v "$HOME":/home --name jenkins_server jenkins/jenkins:lts
+
+==================
+TestAppJob
+==================
+if curl http://172.17.0.1:5050/ | grep "You are calling me from 172.17.0.1"; then
+   exit 0
+else
+   exit 1
+fin 
+
+
+==================
+Jenkins pipeline
+==================
+
+node {
+   stage('Preparation') {
+       catchError(buildResult: 'SUCCESS') {
+          sh 'docker stop samplerunning'
+          sh 'docker rm samplerunning'
+       }
+   }
+   stage('Build') {
+       build 'BuildAppJob'
+   }
+   stage('Results') {
+       build 'TestAppJob'
+   }
+}
+
+
